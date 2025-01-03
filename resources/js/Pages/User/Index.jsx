@@ -1,6 +1,6 @@
 import Pagination from '@/Components/Pagination';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 
 export default function UserIndex({users}) {
     return (
@@ -15,6 +15,16 @@ export default function UserIndex({users}) {
 
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    <div className="flex justify-between item-center mb-2">
+                        <label className="font-bold">Users : {users.total}</label>
+                            <Link
+                                href={route("users.create")}
+                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            >
+                                Create User
+                            </Link>
+                    </div>
+
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
                             <table className="min-w-full">
