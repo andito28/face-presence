@@ -5,21 +5,30 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Transition } from '@headlessui/react';
-import { Head, Link, useForm, usePage } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 
-export default function UserIndex({users}) {
-    const user = usePage().props.auth.user;
+export default function UserCreate() {
 
-        const { data, setData, patch, errors, processing, recentlySuccessful } =
+        const { data, setData, post, errors, processing, recentlySuccessful } =
             useForm({
-                name: user.name,
-                email: user.email,
+                name : "",
+                email : "",
+                password : "",
+                password_confirmation : ""
             });
 
         const submit = (e) => {
             e.preventDefault();
 
-            patch(route('profile.update'));
+            post(route('users.store'),{
+                preserveScroll : true,
+                onSuccess : () => {
+                    alert('user created')
+                },
+                onError : (errors) => {
+                    console.log(errors)
+                }
+            });
         };
 
     return (
@@ -78,6 +87,44 @@ export default function UserIndex({users}) {
                                         />
 
                                         <InputError className="mt-2" message={errors.email} />
+                                    </div>
+
+                                    <div>
+                                        <InputLabel htmlFor="password" value="Password" />
+
+                                        <TextInput
+                                            id="password"
+                                            value={data.password}
+                                            onChange={(e) => setData('password', e.target.value)}
+                                            type="password"
+                                            className="mt-1 block w-full"
+                                            autoComplete="new-password"
+                                        />
+
+                                        <InputError message={errors.password} className="mt-2" />
+                                    </div>
+
+                                    <div>
+                                        <InputLabel
+                                            htmlFor="password_confirmation"
+                                            value="Confirm Password"
+                                        />
+
+                                        <TextInput
+                                            id="password_confirmation"
+                                            value={data.password_confirmation}
+                                            onChange={(e) =>
+                                                setData('password_confirmation', e.target.value)
+                                            }
+                                            type="password"
+                                            className="mt-1 block w-full"
+                                            autoComplete="new-password"
+                                        />
+
+                                        <InputError
+                                            message={errors.password_confirmation}
+                                            className="mt-2"
+                                        />
                                     </div>
 
                                     <div className="flex items-center gap-4">
