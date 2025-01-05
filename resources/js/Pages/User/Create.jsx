@@ -4,8 +4,9 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { Transition } from '@headlessui/react';
+import { Label, Transition } from '@headlessui/react';
 import { Head, Link, useForm } from '@inertiajs/react';
+import SelectBox from '@/Components/SelectBox';
 
 export default function UserCreate() {
 
@@ -14,7 +15,8 @@ export default function UserCreate() {
                 name : "",
                 email : "",
                 password : "",
-                password_confirmation : ""
+                password_confirmation : "",
+                role : "user"
             });
 
         const submit = (e) => {
@@ -45,7 +47,7 @@ export default function UserCreate() {
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
-                            <section className="mx-w-xl">
+                            <section className="max-w-xl">
                                 <header>
                                     <h2 className="text-lg font-medium text-gray-900">
                                         Create User
@@ -84,6 +86,30 @@ export default function UserCreate() {
                                             onChange={(e) => setData('email', e.target.value)}
                                             required
                                             autoComplete="username"
+                                        />
+
+                                        <InputError className="mt-2" message={errors.email} />
+                                    </div>
+
+                                    <div>
+                                        <InputLabel htmlFor="role" value="Role" />
+
+                                        <SelectBox
+                                            onChange={(e) =>
+                                                setData("role",e.target.value)
+                                            }
+                                            id="role"
+                                            currentValue="user"
+                                            options={[
+                                                {
+                                                    value: "admin",
+                                                    label: "Admin"
+                                                },
+                                                {
+                                                    value: "user",
+                                                    label: "User"
+                                                }
+                                            ]}
                                         />
 
                                         <InputError className="mt-2" message={errors.email} />
