@@ -43,7 +43,7 @@ export default function UserIndex({users}) {
                                                 <td className="px-4 py-4 whitespace-nowrap">{user.id}</td>
                                                 <td className="px-4 py-4 whitespace-nowrap">{user.name}</td>
                                                 <td className="px-4 py-4 whitespace-nowrap">{user.email}</td>
-                                                <td className="px-4 py-4 whitespace-nowrap"></td>
+                                                <td className="px-4 py-4 whitespace-nowrap">{user.role}</td>
                                             </tr>
                                         )
                                     })}
