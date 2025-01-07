@@ -7,6 +7,7 @@ import TextInput from '@/Components/TextInput';
 import { Label, Transition } from '@headlessui/react';
 import { Head, Link, useForm } from '@inertiajs/react';
 import SelectBox from '@/Components/SelectBox';
+import roles from '@/Data/roles.json'
 
 export default function UserCreate() {
 
@@ -100,16 +101,7 @@ export default function UserCreate() {
                                             }
                                             id="role"
                                             currentValue="user"
-                                            options={[
-                                                {
-                                                    value: "admin",
-                                                    label: "Admin"
-                                                },
-                                                {
-                                                    value: "user",
-                                                    label: "User"
-                                                }
-                                            ]}
+                                            options={roles}
                                         />
 
                                         <InputError className="mt-2" message={errors.email} />
